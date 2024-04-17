@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """Defines the User class."""
+import models
 from models.base_model import Base
 from models.base_model import BaseModel
 from sqlalchemy import Column
@@ -17,7 +18,7 @@ class User(BaseModel, Base):
         places (sqlalchemy relationship): user rel of the place.
         reviews (sqlalchemy relationship): user review of the place
     """
-        if (storage_engine == 'db'):
+    if models.storage_t == 'db':
             __tablename__ = "users"
             email = Column(String(128), nullable=False)
             password = Column(String(128), nullable=False)
@@ -25,7 +26,7 @@ class User(BaseModel, Base):
             last_name = Column(String(128), nullable=True)
             places = relationship("Place", cascade="all", backref="user")
             reviews = relationship("Review", cascade="all", backref="user")
-        else:
+    else:
             email = ""
             password = ""
             first_name = ""
