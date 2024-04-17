@@ -6,7 +6,6 @@ from sqlalchemy import Column
 from sqlalchemy import String
 from sqlalchemy.orm import relationship
 
-
 class User(BaseModel, Base):
     """this is a use db
     Attributes:
@@ -18,10 +17,21 @@ class User(BaseModel, Base):
         places (sqlalchemy relationship): user rel of the place.
         reviews (sqlalchemy relationship): user review of the place
     """
-    __tablename__ = "users"
-    email = Column(String(128), nullable=False)
-    password = Column(String(128), nullable=False)
-    first_name = Column(String(128), nullable=True)
-    last_name = Column(String(128), nullable=True)
-    places = relationship("Place", cascade="all", backref="user")
-    reviews = relationship("Review", cascade="all", backref="user")
+        if (storage_engine == 'db'):
+            __tablename__ = "users"
+            email = Column(String(128), nullable=False)
+            password = Column(String(128), nullable=False)
+            first_name = Column(String(128), nullable=True)
+            last_name = Column(String(128), nullable=True)
+            places = relationship("Place", cascade="all", backref="user")
+            reviews = relationship("Review", cascade="all", backref="user")
+        else:
+            email = ""
+            password = ""
+            first_name = ""
+            last_name = ""
+
+
+    def __init__(self, *args, **kwargs):
+        """ this function will inut a user """
+        super().__init__(*args, **kwargs)
