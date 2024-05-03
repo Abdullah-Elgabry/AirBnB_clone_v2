@@ -12,7 +12,7 @@ env.hosts = ['100.26.210.153', '100.26.155.94']
 
 def do_clean(number=0):
     """
-    This will del any cash 
+    This will del any cash
     """
     number = 1 if int(number) == 0 else int(number)
 
