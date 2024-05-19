@@ -1,15 +1,14 @@
 #!/usr/bin/python3
-"""
-this will run the app..
-"""
-
+""" this module for returning welcome words """
 from flask import Flask
+
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
+
 @app.route('/')
 def hello_hbnb():
-    """return hrllo HBNB """
+    """return HBNB"""
     return 'Hello HBNB!'
 
 
