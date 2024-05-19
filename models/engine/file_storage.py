@@ -22,10 +22,7 @@ class FileStorage:
     __objects = {}
 
     def all(self, cls=None):
-        """this def will get * obj
-        Return:
-            obj {}
-        """
+        """ This def will get * obj """
 
         dic = {}
         if cls:
@@ -49,8 +46,7 @@ class FileStorage:
             self.__objects[key] = obj
 
     def save(self):
-        """saving the data as a json file"""
-
+        """ saving the data as a json file """
         my_dict = {}
         for key, value in self.__objects.items():
             my_dict[key] = value.to_dict()
@@ -68,11 +64,11 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
-        """ make the elem empty"""
+        """ make the elem empty """
         if obj:
             key = "{}.{}".format(type(obj).__name__, obj.id)
             del self.__objects[key]
 
     def close(self):
-        """ def for call the reload() func"""
+        """ def for call the reload() func """
         self.reload()
