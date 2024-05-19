@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Handeling the states listing"""
+""" Handeling the states listing """
 
 from flask import Flask, render_template
 from models import storage
