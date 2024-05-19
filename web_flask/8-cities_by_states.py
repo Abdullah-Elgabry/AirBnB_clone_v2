@@ -1,24 +1,25 @@
 #!/usr/bin/python3
-"""
-starts a Flask web applicationstart Flask application"""
-
+"""this module for handeling the state listing"""
 from flask import Flask, render_template
-from models import *
 from models import storage
+from models.state import State
 app = Flask(__name__)
-
-
-@app.route('/cities_by_states', strict_slashes=False)
-def cities_by_states():
-    """prints cites && states in alpha-order"""
-    states = storage.all("State").values()
-    return render_template('8-cities_by_states.html', states=states)
+app.url_map.strict_slashes = False
 
 
 @app.teardown_appcontext
-def teardown_db(exception):
-    """this will exit the storage"""
+def closedb(exc):
+    """ session END point"""
     storage.close()
 
+
+@app.route('/cities_by_states')
+def states_list():
+    """ rendering the state selected """
+    states = storage.all(State).values()
+    return render_template('8-cities_by_states.html', states=states)
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000')
+    storage.reload()
+    app.run("0.0.0.0", 5000)

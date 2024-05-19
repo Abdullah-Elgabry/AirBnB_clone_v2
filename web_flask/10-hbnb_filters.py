@@ -1,27 +1,26 @@
 #!/usr/bin/python3
-"""
-this will run the app..
-"""
-
-from flask import Flask, render_template
-from models import *
+""" Handeling filters """
+from flask import Flask
 from models import storage
+from flask import render_template
+
 app = Flask(__name__)
 
 
-@app.route('/hbnb_filters', strict_slashes=False)
-def filters():
-    """show 6-index.html"""
-    states = storage.all("State").values()
-    amenities = storage.all("Amenity").values()
-    return render_template('10-hbnb_filters.html', states=states,
-                           amenities=amenities)
+@app.route("/hbnb_filters", strict_slashes=False)
+def hbnb_filters():
+    """redering filter | with states"""
+    states = storage.all("State")
+    amenities = storage.all("Amenity")
+    return render_template("10-hbnb_filters.html",
+                           states=states, amenities=amenities)
 
 
 @app.teardown_appcontext
-def teardown_db(exception):
-    """this will exit the storage"""
+def teardown(excpt=None):
+    """session closing() """
     storage.close()
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='5000')
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0")

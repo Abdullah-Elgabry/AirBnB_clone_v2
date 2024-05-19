@@ -1,32 +1,35 @@
 #!/usr/bin/python3
-""" thia is the module of  State"""
-import models
+"""Module containg State class"""
+from sqlalchemy.ext.declarative import declarative_base
 from models.base_model import BaseModel, Base
-from models.city import City
-from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
+from models.city import City
+from sqlalchemy import Column, Integer, String
+import shlex
+import models
 
 
 class State(BaseModel, Base):
-    """this is the class of  state """
-    if models.all_rep == "db":
-        __tablename__ = 'states'
-        name = Column(String(128), nullable=False)
-        cities = relationship("City", backref="state")
-    else:
-        name = ""
+    """class state for eash state info
+    Attributes:
+        name: user search
+    """
+    __tablename__ = "states"
+    name = Column(String(128), nullable=False)
+    cities = relationship("City", cascade='all, delete, delete-orphan',
+                          backref="state")
 
-    def __init__(self, *args, **kwargs):
-        """instance creator for state """
-        super().__init__(*args, **kwargs)
-
-    if models.all_rep != "db":
-        @property
-        def cities(self):
-            """ this func will make an obj """
-            city_list = []
-            all_cities = models.storage.all(City)
-            for city in all_cities.values():
-                if city.state_id == self.id:
-                    city_list.append(city)
-            return city_list
+    @property
+    def cities(self):
+        var = models.storage.all()
+        st_lst = []
+        result = []
+        for lst in var:
+            city = lst.replace('.', ' ')
+            city = shlex.split(city)
+            if (city[0] == 'City'):
+                st_lst.append(var[lst])
+        for elem in st_lst:
+            if (elem.state_id == self.id):
+                result.append(elem)
+        return (result)
