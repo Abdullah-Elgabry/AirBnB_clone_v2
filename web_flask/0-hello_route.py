@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-""" this module for returning welcome words """
+"""
+Handeling routes
+"""
+
 from flask import Flask
 
 app = Flask(__name__)

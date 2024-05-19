@@ -21,14 +21,14 @@ def hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def cisfun(text):
-    """this will print“C ” ++ txt value"""
+    """rende c and it's val"""
     return 'C ' + text.replace('_', ' ')
 
 
 @app.route('/python', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def pythoniscool(text='is cool'):
-    """returns Python ++ txt value"""
+    """rende python and it's val"""
     return 'Python ' + text.replace('_', ' ')
 
 
