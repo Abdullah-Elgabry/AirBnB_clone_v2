@@ -25,9 +25,8 @@ def states_id(id):
 
 @app.teardown_appcontext
 def teardown(exc):
-    """ close the session() function"""
+    """ close the session() function """
     storage.close()
 
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(host='0.0.0.0', port='5000')
