@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-this will run the app..
+Handeling routes
 """
 
 from flask import Flask, render_template

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-this will run the app..
+Handeling routes
 """
 
 from flask import Flask
@@ -21,7 +21,7 @@ def hbnb():
 
 @app.route('/c/<text>', strict_slashes=False)
 def cisfun(text):
-    """this will print“C ” ++ txt value"""
+    """rende c and it's val"""
     return 'C ' + text.replace('_', ' ')
 
 if __name__ == '__main__':
